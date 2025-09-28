@@ -1,0 +1,36 @@
+## Secure and monitored web infrastructure
+
+Step-by-step explanation of a secure server
+
+1. Added element
+    Firewalls: Software used to improve the security of a local network against external intrusions.
+    SSL: An internet security protocol that allows for encrypted communication and system monitoring 
+        (client monitoring).
+
+2. What are firewalls for?
+    Firewalls are used to filter and control network traffic to protect the infrastructure.
+
+3. HTTPS traffic
+    This allows for encrypted communication between the client and the server,
+    keeping data private and secure.
+
+4. Monitoring
+    Monitoring is used to monitor server status (CPU, memory, errors, requests) and detect problems quickly.
+
+5. Data collection through monitoring
+    Using small agents installed on each server that send metrics and logs to a central system.
+
+6. QPS
+    Configure the monitoring agent to count the number of requests processed by the web server per second.
+
+Infrastructure Issue
+
+1. SSL Issue
+    Because traffic between the Load Balancer and the servers is no longer encrypted 
+    (it travels in clear text via HTTP).
+
+2. Issue with a single MySQL server
+    This creates a SPOF; if this server fails, no more data can be written.
+
+3. Issue with the same component
+    Because this mixes roles, complicates maintenance, and can cause data inconsistencies between servers.
