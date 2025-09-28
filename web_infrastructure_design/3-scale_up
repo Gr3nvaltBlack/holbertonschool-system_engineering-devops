@@ -1,0 +1,15 @@
+## Scale up
+
+1. Added element
+    
+    A second server: to avoid a single point of failure, if one fails,
+                    the other continues to serve the site.
+
+    Load Balancer (HAProxy) clustered with another: to distribute traffic between multiple servers and prevent a single server from being overloaded.
+                                                    In a cluster, if one LB fails, the other takes over.
+
+    Web server: to manage static files (HTML, images, CSS) and quickly serve pages.
+
+    Application server: to execute the site logic (dynamic code such as PHP, Python, Node.js).
+
+    Database server: to store information (users, orders, messages) and to avoid mixing storage and application.
