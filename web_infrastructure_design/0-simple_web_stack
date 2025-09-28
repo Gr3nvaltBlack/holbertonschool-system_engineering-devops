@@ -1,0 +1,47 @@
+## Simple Web Infrastructure
+
+A user would like to access the website www.foobar.com via any browser.
+Below, I will present a simple web infrastructure in several steps, as well as
+how it processes the user's request:
+
+1. User search
+The user opens their PC, goes to their browser, and in the search bar
+they send their query *www.foobar.com*.
+
+2. DNS analysis
+(Domain Name System): A computer service that associates internet domain names
+with their IP addresses. When the user sends their request, a breakdown begins:
+- Domain name: This is the human-readable address: *foobar.com*
+- DNS record type: *www* is an A record (it links a name to an IP address)
+The domain points to the IP address **8.8.8.8** (that of the server hosting the website)
+
+3. Server (machine)
+Now we move on to the server (machine) part.
+The server (machine) is a special computer that runs 24/7.
+This server has the IP address **8.8.8.8** and is once again the one hosting the website.
+
+4. Web server (NGINX)
+The server (machine) runs software inside the server (machine).
+Its role is to receive HTTP requests and respond with content. 
+This content can be static files (HTML, CSS pages) that it sends directly or
+a dynamic page, then Nginx will forward the request to the application server.
+    ° Application Server
+The application server is software that runs code. Its role is to execute
+the business logic and then provide a response to the user.
+
+5. Database (MySQL)
+The database allows you to store and retrieve various data.
+This data can be modified, changed, or completely deleted.
+The application server queries the database to retrieve or update the data
+as needed.
+
+6. User's Browser
+Once all processing is complete, the browser returns the request response.
+
+
+SPOF (Single Point of Failure)
+A point in a computer system on which the entire system depends and whose
+failure would result in the complete shutdown of the system.
+
+Impact: Users will be unable to access the website until the issue is resolved, resulting 
+        in service interruption.
