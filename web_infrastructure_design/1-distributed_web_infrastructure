@@ -1,0 +1,44 @@
+## Distributed web infrastructure
+
+Explanation of the infrastructure:
+
+1. Added element
+    Load Balanced (LB HAProxy): A component that allows load balancing between multiple
+        servers, sending user requests to both servers to avoid overloading a single one.
+
+    Server (A & B): The two servers provide redundancy; if one fails, the other can continue, and there
+        will be greater capacity to distribute traffic.
+
+    MySQL Primary & Replica Database: This ensures data redundancy. The primary receives writes,
+        while the replica keeps an up-to-date copy.
+
+2. Distribution algorithm
+    For load distribution during requests sent by the user.
+    The LB sends the first request to server A, the second to server B, then back to server A, etc.
+
+3. Configuration
+    Active-Active: Both servers receive requests simultaneously.
+    Active-Passive: Only one server processes requests, the other remains in reserve and is only used in case of failure.
+    For ours, we use the Active-Active configuration.
+
+4. How a MySQL Cluster Works
+    Primary: This is the master and receives all writes (INSERT, UPDATE, DELETE).
+    Replica: This is the slave. It receives a copy of the writes (via replication) and can respond to reads.
+    If the primary cluster fails, the replica can be promoted.
+        ° Difference
+    Primary: The application sends writes to it.
+    Replica: the application can send reads to it.
+
+5. SPOF
+    The Load Balancer is unique; if it fails, there's no access.
+    The primary MySQL is unique; if we don't automate the promotion of a replica, it causes an outage.
+
+    Security
+    No firewall (exposed servers)
+    No HTTPS (unencrypted traffic, vulnerable).
+
+    Monitoring
+    No alert/log system: we don't know when a server is overloaded or down.
+
+    Updates/Deployments
+    Restarting the servers interrupts the service if they are all restarted at the same time.
